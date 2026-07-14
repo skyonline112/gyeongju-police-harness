@@ -8,23 +8,23 @@
 
 ```mermaid
 graph TD
-    Input[민원 신청서] --> Classifier[Classifier Agent]
-    Classifier -->|카테고리 분류 결과| Searcher[Searcher Agent: 로컬 DB + 실시간 웹 검색]
-    Searcher -->|법률 근거 취합| Drafter[Drafter Agent: 공문서 답변 집필]
-    Drafter -->|답변서 초안 송신| ParallelReview{병렬 검수 에이전트 팀}
+    Input["민원 신청서"] --> Classifier["Classifier Agent"]
+    Classifier -->|카테고리 분류 결과| Searcher["Searcher Agent: 로컬 DB + 실시간 웹 검색"]
+    Searcher -->|법률 근거 취합| Drafter["Drafter Agent: 공문서 답변 집필"]
+    Drafter -->|답변서 초안 송신| ParallelReview{"병렬 검수 에이전트 팀"}
     
-    subgraph Reviewer Consortium (병렬 검수단)
-        ParallelReview --> Reviewer1[Legal Auditor: 법률 정합성]
-        ParallelReview --> Reviewer2[Privacy Inspector: 개인정보 필터링]
-        ParallelReview --> Reviewer3[PR Officer: 대민 톤앤매너]
+    subgraph "Reviewer Consortium (병렬 검수단)"
+        ParallelReview --> Reviewer1["Legal Auditor: 법률 정합성"]
+        ParallelReview --> Reviewer2["Privacy Inspector: 개인정보 필터링"]
+        ParallelReview --> Reviewer3["PR Officer: 대민 톤앤매너"]
     end
     
-    Reviewer1 --> Consensus{최종 합의 및 조율}
+    Reviewer1 --> Consensus{"최종 합의 및 조율"}
     Reviewer2 --> Consensus
     Reviewer3 --> Consensus
     
     Consensus -->|반려 REJECTED: 수정 피드백| Drafter
-    Consensus -->|승인 APPROVED| Output[최종 정보공개 결정통지서 출력]
+    Consensus -->|승인 APPROVED| Output["최종 정보공개 결정통지서 출력"]
 ```
 
 ## 에이전트 역할 매핑

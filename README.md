@@ -31,29 +31,29 @@
 
 ```mermaid
 graph TD
-    Input[시민 민원 신청서] --> Classifier[Classifier Agent]
+    Input["시민 민원 신청서"] --> Classifier["Classifier Agent"]
     
-    subgraph Knowledge Acquisition (지식 획득)
-        Classifier -->|분류 결과 송신| Searcher[Searcher Agent]
-        Searcher -->|1차| LocalDB[(로컬 규정 DB)]
-        Searcher -->|2차| WebSearch[Dynamic Web Search: 최신 법령/판례 수집]
+    subgraph "Knowledge Acquisition (지식 획득)"
+        Classifier -->|분류 결과 송신| Searcher["Searcher Agent"]
+        Searcher -->|1차| LocalDB[("로컬 규정 DB")]
+        Searcher -->|2차| WebSearch["Dynamic Web Search: 최신 법령/판례 수집"]
     end
     
-    Searcher -->|구조화된 법률 근거| Drafter[Drafter Agent: 답변서 기획/집필]
-    Drafter -->|답변 초안 전송| ParallelGate{병렬 검수 게이트}
+    Searcher -->|구조화된 법률 근거| Drafter["Drafter Agent: 답변서 기획/집필"]
+    Drafter -->|답변 초안 전송| ParallelGate{"병렬 검수 게이트"}
     
-    subgraph Reviewer Consortium (병렬 합의 검수단)
-        ParallelGate --> Reviewer1[Legal Auditor: 법적 무오류성 검토]
-        ParallelGate --> Reviewer2[Privacy Inspector: 개인정보 노출 필터링]
-        ParallelGate --> Reviewer3[PR Officer: 가독성 & 공익성 평가]
+    subgraph "Reviewer Consortium (병렬 합의 검수단)"
+        ParallelGate --> Reviewer1["Legal Auditor: 법적 무오류성 검토"]
+        ParallelGate --> Reviewer2["Privacy Inspector: 개인정보 노출 필터링"]
+        ParallelGate --> Reviewer3["PR Officer: 가독성 & 공익성 평가"]
     end
     
-    Reviewer1 --> Consensus{Consensus Engine}
+    Reviewer1 --> Consensus{"Consensus Engine"}
     Reviewer2 --> Consensus
     Reviewer3 --> Consensus
     
     Consensus -->|REJECTED: 통합 피드백 피스팅| Drafter
-    Consensus -->|APPROVED: 전원 합의 통과| Output[최종 정보공개 결정통지서 출력]
+    Consensus -->|APPROVED: 전원 합의 통과| Output["최종 정보공개 결정통지서 출력"]
 ```
 
 ---
